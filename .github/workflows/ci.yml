@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+        - os: ubuntu-24.04
+        - os: ubuntu-26.04
+        - os: macOS-latest
+ 
+    name: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v7
+      with: {submodules: recursive}
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1
+      with:
+        key: ${{ matrix.os }}
+        max-size: "2G"
+
+    - name: Build
+      run: |
+        ./make_all.sh
+

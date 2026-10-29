@@ -1,2 +1,23 @@
 .DS_Store
 **/.DS_Store
+bin/
+obj/
+
+# CMake temporary output
+
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+install_manifest.txt
+
+# Common editor backups
+~$*
+*~
+*.bak
+\#*#
+
+# Ignore Visual Studio Code User-specific files
+build/
+install/
+.vscode/
+
